@@ -3,6 +3,7 @@ require 'test_helper'
 class UsersControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:grant)
+    log_in_as(@user)
   end
 
   test "should get new" do
