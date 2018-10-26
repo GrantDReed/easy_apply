@@ -4,5 +4,5 @@ grant:
   name: Grant Reed
   email: grant@example.com
   employer: false
-  password_digest: MyString
+  password_digest: <%= User.digest('password') %>
 
