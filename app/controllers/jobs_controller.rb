@@ -11,13 +11,23 @@ class JobsController < ApplicationController
   end
 
   def create
-    @job = Job.new(job_params)
-    if @job.save
-      flash[:success] = "Job posted!"
-      redirect_to @job
+    @user = User.find(session[:user_id])
+    if @user.employer
+      @job = Job.new(job_params)
+      if @job.save
+        @user << @job
+        flash[:success] = "Job posted!"
+        redirect_to @job
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      applied = @user.jobs.find(params[:id]).count > 0
+      unless applied
+        @user << Job.find(params[:id])
+      end
     end
+
   end
 
   def edit
