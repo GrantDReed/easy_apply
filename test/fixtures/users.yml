@@ -1,13 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  email: MyString
+grant:
+  name: Grant Reed
+  email: grant@example.com
   employer: false
   password_digest: MyString
 
-two:
-  name: MyString
-  email: MyString
-  employer: false
-  password_digest: MyString
