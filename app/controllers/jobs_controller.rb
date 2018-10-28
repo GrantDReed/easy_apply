@@ -3,6 +3,7 @@ class JobsController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def index
+    @user = User.find(session[:user_id])
     @jobs = Job.all
   end
 
@@ -15,16 +16,15 @@ class JobsController < ApplicationController
     if @user.employer
       @job = Job.new(job_params)
       if @job.save
-        @user << @job
+        @user.jobs << @job
         flash[:success] = "Job posted!"
         redirect_to @job
       else
         render 'new'
       end
     else
-      applied = @user.jobs.find(params[:id]).count > 0
-      unless applied
-        @user << Job.find(params[:id])
+      unless @user.jobs.exists?(params[:id])
+        @user.jobs << Job.find(params[:id])
       end
     end
 

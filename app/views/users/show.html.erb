@@ -3,7 +3,7 @@
   <p>Email: <%= @user.email %></p>
   <p><button><%= link_to "Edit profile", edit_user_path(@user) %></button>
 </div>
-<h3>Your jobs:</h3>
+<h3><%= (@user.employer ? "Your posted jobs:" : "Your applications:" %></h3>
 <ol>
   <% @user.jobs.each do |job| %>
     <li>
@@ -11,7 +11,7 @@
       <p><%= job.description %></p>
       <p>
         <button>
-            <%= link_to (@user.employer ? "View applicants" : "View job"), job_path(job) %>
+          <%= link_to (@user.employer ? "View applicants" : "View job"), job_path(job) %>
         </button>
       </p>
     </li>

@@ -4,6 +4,18 @@
     <li>
       <h3><%= job.title %></h3>
       <p><%= job.description %></p>
+      <div>
+        <button><%= link_to 'View', job_path(job) %></button>
+        <% unless @user.employer %>
+          <%= button_to "Apply", jobs_path(id: job.id), disabled: @user.jobs.exists?(job.id), class: "apply-button" %>
+        <% end %>
+      </div>
     </li>
   <% end %>
 </ol>
+<script type="text/javascript">
+  $(".apply-button").click(e => {
+    e.stopPropagation();
+    $(this).prop('disabled', true);
+  });
+</script>
