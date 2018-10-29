@@ -1,6 +1,6 @@
 # EasyApply
 
-A simple, no-frills application for posting and applying to jobs.  Hosted on Heroku at fountain-easy-apply.herokuapp.com
+A simple, no-frills application for posting and applying to jobs.  Hosted on Heroku at [fountain-easy-apply.herokuapp.com]
 
 ## Running locally
 
