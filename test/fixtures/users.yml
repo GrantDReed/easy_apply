@@ -6,3 +6,8 @@ grant:
   employer: false
   password_digest: <%= User.digest('password') %>
 
+john:
+  name: John Doe
+  email: john@example.com
+  employer: true
+  password_digest: <%= User.digest('password') %>

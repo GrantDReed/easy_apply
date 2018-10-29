@@ -3,6 +3,10 @@ require 'test_helper'
 class JobsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:grant)
+    @jobs = Job.all
+    @jobs.each do |job|
+      job.users << users(:john)
+    end
     log_in_as(@user)
   end
 
