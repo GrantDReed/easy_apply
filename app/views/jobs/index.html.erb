@@ -1,21 +1,19 @@
 <h1>All Jobs</h1>
 <ol>
   <% @jobs.each do |job| %>
-    <li>
-      <h3><%= job.title %></h3>
-      <p><%= job.description %></p>
-      <div>
-        <button><%= link_to 'View', job_path(job) %></button>
-        <% unless @user.employer %>
-          <%= button_to "Apply", jobs_path(id: job.id), disabled: @user.jobs.exists?(job.id), class: "apply-button" %>
-        <% end %>
-      </div>
-    </li>
+    <% applied = @user.jobs.exists?(job.id) %>
+    <h3><%= job.title %></h3>
+    <p>Employer: <%= job.users.where(employer: true).first.name %></p>
+    <p>Description: <%= job.description %></p>
+    <div>
+      <%= button_to 'View', job_path(job), method: :get, form: inline %>
+      <% unless @user.employer %>
+        <%= button_to (applied ? "Applied" : "Apply"),
+          jobs_path(id: job.id),
+          disabled: applied,
+          data: { disable_with: "Applied" },
+          form: inline %>
+      <% end %>
+    </div>
   <% end %>
 </ol>
-<script type="text/javascript">
-  $(".apply-button").click(e => {
-    e.stopPropagation();
-    $(this).prop('disabled', true);
-  });
-</script>

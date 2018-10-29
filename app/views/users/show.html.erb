@@ -1,19 +1,20 @@
 <div>
   <p>Name: <%= @user.name %></p>
   <p>Email: <%= @user.email %></p>
-  <p><button><%= link_to "Edit profile", edit_user_path(@user) %></button>
+  <%= button_to "Edit profile", edit_user_path(@user), method: :get %>
 </div>
-<h3><%= (@user.employer ? "Your posted jobs:" : "Your applications:" %></h3>
+<h3><%= (@user.employer ? "Your posted jobs:" : "Your applications:") %></h3>
 <ol>
   <% @user.jobs.each do |job| %>
     <li>
       <h3><%= job.title %></h3>
       <p><%= job.description %></p>
-      <p>
-        <button>
-          <%= link_to (@user.employer ? "View applicants" : "View job"), job_path(job) %>
-        </button>
-      </p>
+      <%= button_to (@user.employer ? "View applicants" : "View job"),
+          job_path(job), method: :get, form: inline %>
+      <% if @user.employer %>
+        <%= button_to "Delete job", job_path(job),
+            method: :delete, form: inline %>
+      <% end %>
     </li>
   <% end %>
 </ol>

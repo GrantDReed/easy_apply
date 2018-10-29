@@ -1,12 +1,12 @@
 <header>
   <nav>
     <% if logged_in? %>
-      <button><%= link_to 'Profile', user_path(current_user)%></button>
-      <button><%= link_to 'Jobs', jobs_path %></button>
+      <%= button_to 'Profile', user_path(current_user), method: :get, form: inline %>
+      <%= button_to 'Jobs', jobs_path, method: :get, form: inline %>
       <% if current_user.employer? %>
-        <button><%= link_to 'Create Job', new_job_path %></button>
+        <%= button_to 'Create Job', new_job_path, method: :get, form: inline %>
       <% end %>
-      <button><%= link_to 'Log out', logout_path, method: :delete %></button>
+      <%= button_to 'Log out', logout_path, method: :delete, form: inline %>
     <% end %>
   </nav>
 </header>

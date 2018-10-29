@@ -1,4 +1,15 @@
 <div>
   <h3><%= @job.title %></h3>
-  <p><%= @job.description %></p>
+  <p>Description: <%= @job.description %></p>
 </div>
+<% if current_user.employer %>
+  <h3>Applicants:</h3>
+  <ol>
+    <% @job.users.where.not(id: current_user.id).each do |user| %>
+      <li>
+        <p>Name: <%= user.name %></p>
+        <p>Email: <%= user.email %></p>
+      </li>
+    <% end %>
+  </ol>
+<% end %>

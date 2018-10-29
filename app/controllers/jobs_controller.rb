@@ -5,6 +5,7 @@ class JobsController < ApplicationController
   def index
     @user = User.find(session[:user_id])
     @jobs = Job.all
+    @employers = User.where(employer: true)
   end
 
   def new
@@ -24,10 +25,10 @@ class JobsController < ApplicationController
       end
     else
       unless @user.jobs.exists?(params[:id])
-        @user.jobs << Job.find(params[:id])
+        @job = Job.find(params[:id])
+        @user.jobs << @job
       end
     end
-
   end
 
   def edit
@@ -35,10 +36,10 @@ class JobsController < ApplicationController
   end
 
   def update
-    @job = Job.find(params[:id])
+    job = Job.find(params[:id])
     if @job.update_attributes(job_params)
       flash[:success] = "Job post updated!"
-      redirect_to @job
+      redirect_to job
     else
       render 'edit'
     end
@@ -46,6 +47,12 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
+  end
+
+  def destroy
+    job = Job.find(params[:id])
+    job.destroy
+    redirect_to user_path(current_user)
   end
 
   private
