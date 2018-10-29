@@ -1,24 +1,12 @@
-# README
+# EasyApply
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple, no-frills application for posting and applying to jobs.  Hosted on Heroku at fountain-easy-apply.herokuapp.com
 
-Things you may want to cover:
+## Running locally
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Open the terminal and run the following commands:
+1. `git clone https://github.com/GrantDReed/easy_apply.git`
+2. `cd easy_apply`
+3. `bundle install`
+4. `rails server`
+5. Find the app running at `http://localhost:3000`
